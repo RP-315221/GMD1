@@ -22,3 +22,7 @@ The gameplay loop of the player is to get into a level, die, restart and grind i
 As for the game objects, there will be traps that periodically trigger or have pathways they pass through.
 ## Objectives and Progression
 There will be a total of 5 levels, each level will be divided into 3 sections using a pair of gates. These gates will be opened by collecting collectibles. If the player dies, they restart the whole level, if they get to the next one their respawn is set there. 
+## Milestones
+1. Player model + Controlls
+2. Level layout + textures + props
+3. Traps + Game UI
