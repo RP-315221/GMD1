@@ -26,9 +26,9 @@ There will be a total of 5 levels, each level will be divided into 3 sections us
 So far none. For the future we could add character skins, additional mechanics as DLC’s or something
 ## Interactivity
 The player physical interactions consist of:
-•	Interaction with the traps – if collided with them or their projectiles, they will die. 
-•	Interaction with the map geometry, there will be some holes in the floor that the player can fall through and die. If a player bumps into gates or a wall, they will stop moving. 
-•	Interaction with collectibles – they need to be collected to open a gate. 
+* Interaction with the traps – if collided with them or their projectiles, they will die.
+* Interaction with the map geometry, there will be some holes in the floor that the player can fall through and die. If a player bumps into gates or a wall, they will stop moving.
+* Interaction with collectibles – they need to be collected to open a gate. 
 ## Milestones
 1. Player model + Controlls
 2. Level layout + textures + props
