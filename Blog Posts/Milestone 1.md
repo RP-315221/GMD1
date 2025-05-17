@@ -75,7 +75,7 @@ Even if the player can't move (because of a wall), the eyeball still rotates to 
 ![image](https://github.com/user-attachments/assets/ccc12249-7b79-4c32-b91e-5fa0c3bd170f)
 
 ## Whats next?
-After this work I have tried logically planned out my next moves and realized that my milestone order should be a bit different. Heres an updated list
+After this work I have logically planned out my next moves and realized that my milestone order should be a bit different. Heres an updated list
 1. Player Model + Movement - done
 2. Traps and other game objects + interactions with the player
 3. Level building + UI
