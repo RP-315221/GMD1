@@ -32,7 +32,7 @@ public class EyeballMovement : MonoBehaviour
     {
         if (isMoving)
         {
-            // ✅ Check ahead before moving
+            // Check ahead before moving
             if (Physics.Raycast(transform.position + Vector3.up * 0.5f, moveDirection, rayLength, obstacleMask))
             {
                 // Stop movement if obstacle ahead
@@ -64,7 +64,7 @@ public class EyeballMovement : MonoBehaviour
                 if (bufferedDirection != Vector3.zero)
                 {
                     moveDirection = bufferedDirection;
-                    lastFacingDirection = moveDirection; // ✅ Even if blocked, rotate to it
+                    lastFacingDirection = moveDirection; // Even if blocked, rotate to it
                     bufferedDirection = Vector3.zero;
                 }
 
@@ -83,7 +83,7 @@ public class EyeballMovement : MonoBehaviour
             return;
         }
 
-        // ✅ Rotate when idle
+        // Rotate when idle
         if (lastFacingDirection != Vector3.zero)
         {
             Quaternion targetRotation = Quaternion.LookRotation(lastFacingDirection, Vector3.up);
@@ -95,7 +95,7 @@ public class EyeballMovement : MonoBehaviour
             !Physics.Raycast(transform.position + Vector3.up * 0.5f, bufferedDirection, rayLength, obstacleMask))
         {
             moveDirection = bufferedDirection;
-            lastFacingDirection = moveDirection; // ✅ Start rotating to buffered direction
+            lastFacingDirection = moveDirection; // Start rotating to buffered direction
             bufferedDirection = Vector3.zero;
             isMoving = true;
             segmentStart = transform.position;
@@ -114,7 +114,7 @@ public class EyeballMovement : MonoBehaviour
         Vector3 intendedDirection = new Vector3(filtered.y, 0f, -filtered.x);
 
         bufferedDirection = intendedDirection;
-        lastFacingDirection = intendedDirection; // ✅ Rotate toward this even if blocked
+        lastFacingDirection = intendedDirection; // Rotate toward this even if blocked
     }
 
     private Vector2 GetFilteredDirection(Vector2 input)
