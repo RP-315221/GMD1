@@ -45,6 +45,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 868986015211685765, guid: a3e3d05099251b9408e607c0adfe5d87, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6a5ff54f23a30704bb31daabe1c101bf, type: 2}
     - target: {fileID: 1201499626071099117, guid: a3e3d05099251b9408e607c0adfe5d87, type: 3}
       propertyPath: m_Name
       value: Traphome_Mid
@@ -179,6 +183,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5324524812019281959, guid: f1743b005e7bf2445ac2f4cd4c2f6279, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 74d987ed8a5be024b96535482e4c63e5, type: 2}
     - target: {fileID: 6884474286417386214, guid: f1743b005e7bf2445ac2f4cd4c2f6279, type: 3}
       propertyPath: m_Convex
       value: 1
@@ -218,6 +226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trapHome: {fileID: 6983562944836217788}
-  moveSpeed: 2
+  moveSpeed: 3
   rotationSpeed: 360
   moveDistance: 1.5
+  timeOffset: 0.75

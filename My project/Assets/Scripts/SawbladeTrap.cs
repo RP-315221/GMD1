@@ -1,15 +1,18 @@
 using UnityEngine;
+using System.Collections;
 
 public class SawbladeTrap : MonoBehaviour
 {
-    public Transform trapHome; // Reference to the Traphome_Mid
-    public float moveSpeed = 2f;
-    public float rotationSpeed = 180f; // degrees per second
-    public float moveDistance = 2f;
+    public Transform trapHome;              // Reference to Traphome_Mid
+    public float moveSpeed = 2f;            // Movement speed
+    public float rotationSpeed = 180f;      // Saw rotation speed
+    public float moveDistance = 2f;         // Total move distance from center
+    public float timeOffset = 0.5f;         // ⏱ Delay before saw starts moving
 
     private Vector3 startPos;
     private Vector3 targetPos;
     private bool movingForward = true;
+    private bool active = false;
 
     void Start()
     {
@@ -20,20 +23,30 @@ public class SawbladeTrap : MonoBehaviour
             return;
         }
 
-        // Use initial sawblade position as center
+        // Calculate movement range based on trapHome's orientation
         Vector3 center = transform.position;
-
         startPos = center - trapHome.right * moveDistance;
         targetPos = center + trapHome.right * moveDistance;
+
+        // Delay activation
+        StartCoroutine(DelayedStart());
     }
 
+    IEnumerator DelayedStart()
+    {
+        yield return new WaitForSeconds(timeOffset);
+        active = true;
+    }
 
     void Update()
     {
-        // Rotate clockwise on Y axis
+        // Always rotate, even before moving
         transform.Rotate(Vector3.left * rotationSpeed * Time.deltaTime, Space.World);
 
-        // Move back and forth on X axis (relative to trapHome's right vector)
+        if (!active)
+            return;
+
+        // Move back and forth between start and target positions
         Vector3 dir = (movingForward ? targetPos : startPos) - transform.position;
         float step = moveSpeed * Time.deltaTime;
 
