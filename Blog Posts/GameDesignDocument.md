@@ -31,5 +31,6 @@ The player physical interactions consist of:
 * Interaction with collectibles – they need to be collected to open a gate. 
 ## Milestones
 1. Player model + Controlls
-2. Level layout + textures + props
-3. Traps + Game UI
+2. Traps
+3. Level Layout
+4. UI & Game Logic
