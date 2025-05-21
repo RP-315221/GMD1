@@ -77,5 +77,6 @@ Even if the player can't move (because of a wall), the eyeball still rotates to 
 ## Whats next?
 After this work I have logically planned out my next moves and realized that my milestone order should be a bit different. Heres an updated list
 1. Player Model + Movement - done
-2. Traps and other game objects + interactions with the player
-3. Level building + UI
+2. Traps and their logic
+3. Level building
+4. UI & Game Logic
