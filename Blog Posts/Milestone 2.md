@@ -20,11 +20,11 @@ As you may notice from the code, once the collision is detected the player objec
 ![PlayerDie-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/f14ef5e8-b5d2-4903-afc8-18f39d9dfa1f)
 
 ## Sawmill trap
-The first trap I made was the sawmill. This trap aims to cover multiple grid tiles the player could traverse through and as all the other traps requires pitch perfect timing to beat. The trap itself was made out of two separate 3D prefabs, first being of course the sawblade, and the other marks the pathway of the saw. The saw blade is marked with the 'Death' layer and has a mesh collider that collides with the player object. 
+The first trap I made was the sawmill. This trap aims to cover multiple grid tiles the player could traverse through and as all the other traps requires pitch perfect timing to beat. The trap itself was made out of two separate 3D prefabs, first being of course the sawblade, and the other marks the pathway of the saw.  
 
 ![image](https://github.com/user-attachments/assets/22a0cd90-4451-4a17-96ce-3701cc869b11)
 
-I added scripted behaviour for the saw to rotate and move  side to side and placed it in the middle of the pathway. I also made sure to include a delay for the movement to start so the traps are not in sync. 
+The saw blade is marked with the 'Death' layer and has a mesh collider that collides with the player object. I added scripted behaviour for the saw to rotate and move  side to side and placed it in the middle of the pathway. I also made sure to include a delay for the movement to start so the traps are not in sync. 
 
 ![image](https://github.com/user-attachments/assets/5552852d-8068-45c6-bb28-fe63f969f921)
 
