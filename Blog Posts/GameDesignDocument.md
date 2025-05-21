@@ -14,7 +14,7 @@ The player is a small character that is able to walk in 4 directions. Their will
 ## Visual and Audio style
 The visual style of the game will retain some features from the inspiration - 3D low poly. However the overall thematic will change, once again, we are moving away from dungeon, more towards hell. It will be less creepy and dark, more warm colors, fire, lava, rock textures, hopefully some fitting props too.
 ## Game World Fiction
-Same as the game controls, the game lore is not overly complicated. We are playing as a small demon - a goofy eyeball with arms and legs. This demon wants to escape hell and enter the human realm. 
+Same as the game controls, the game lore is not overly complicated. We are playing as a small demon - a goofy floating eyeball demon. This demon wants to escape hell and enter the human realm. 
 ## Platform
 The game is primarily aimed to be compatible with PC using Xbox controls. However, it can very easily be converted to a mobile game too. 
 ## Gameplay loops
