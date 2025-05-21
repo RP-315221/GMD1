@@ -58,7 +58,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 116
@@ -75,7 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0309e5183e8bfa4892c6822231793cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 3.5
   segmentLength: 1
   obstacleMask:
     serializedVersion: 2
@@ -423,6 +423,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Unity Eyeball Prefab
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ed23d464d22ddbc4dbb3c0d7be53575d, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 1157214002419015242, guid: ed23d464d22ddbc4dbb3c0d7be53575d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 33.147682
@@ -575,6 +579,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.000011516634
       objectReference: {fileID: 0}
+    - target: {fileID: 8003028576119023140, guid: ed23d464d22ddbc4dbb3c0d7be53575d, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: f027de8a0e0d3ff439d97889fbce1d35, type: 2}
+    - target: {fileID: 8003028576119023140, guid: ed23d464d22ddbc4dbb3c0d7be53575d, type: 3}
+      propertyPath: 'm_Materials.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a4ed3c9994529144bbd888e00db3a21b, type: 2}
+    - target: {fileID: 8003028576119023140, guid: ed23d464d22ddbc4dbb3c0d7be53575d, type: 3}
+      propertyPath: 'm_Materials.Array.data[3]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a4ed3c9994529144bbd888e00db3a21b, type: 2}
+    - target: {fileID: 8003028576119023140, guid: ed23d464d22ddbc4dbb3c0d7be53575d, type: 3}
+      propertyPath: 'm_Materials.Array.data[4]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a4ed3c9994529144bbd888e00db3a21b, type: 2}
     - target: {fileID: 8135065374517906552, guid: ed23d464d22ddbc4dbb3c0d7be53575d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 43.40149
@@ -679,6 +699,6 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 1.5
-  m_Height: 7
+  m_Height: 4
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
