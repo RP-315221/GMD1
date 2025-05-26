@@ -9,119 +9,124 @@ public class EyeballMovement : MonoBehaviour
 
     [Header("Obstacle Detection")]
     public LayerMask obstacleMask;
-    public float rayLength = 0.6f;
 
     private Vector3 moveDirection = Vector3.zero;
     private Vector3 segmentStart;
+    private Vector3 targetPosition;
     private Vector3 bufferedDirection = Vector3.zero;
-    private Vector3 lastFacingDirection = Vector3.forward; // 🧠 Always rotate to this
+    private Vector3 lastFacingDirection = Vector3.forward;
     private bool isMoving = false;
 
     void Start()
     {
-        // Snap player to grid on start
-        transform.position = new Vector3(
-            Mathf.Round(transform.position.x),
-            transform.position.y,
-            Mathf.Round(transform.position.z)
-        );
+        transform.position = SnapToGrid(transform.position);
         segmentStart = transform.position;
+        targetPosition = transform.position;
+        GameManager.Instance.RegisterPlayer(gameObject);
     }
 
     void Update()
     {
         if (isMoving)
         {
-            // Check ahead before moving
-            if (Physics.Raycast(transform.position + Vector3.up * 0.5f, moveDirection, rayLength, obstacleMask))
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+
+            Quaternion targetRot = Quaternion.LookRotation(lastFacingDirection, Vector3.up);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRot, 720f * Time.deltaTime);
+
+            if (Vector3.Distance(transform.position, targetPosition) < 0.01f)
             {
-                // Stop movement if obstacle ahead
-                moveDirection = Vector3.zero;
-                isMoving = false;
-                return;
-            }
-
-            // Move forward
-            transform.position += moveDirection * moveSpeed * Time.deltaTime;
-
-            // Update facing direction
-            if (moveDirection != Vector3.zero)
-            {
-                lastFacingDirection = moveDirection;
-            }
-
-            // Smooth rotation
-            Quaternion targetRotation = Quaternion.LookRotation(lastFacingDirection, Vector3.up);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 720f * Time.deltaTime);
-
-            // Check if we've reached a full segment
-            if (Vector3.Distance(segmentStart, transform.position) >= segmentLength)
-            {
-                transform.position = segmentStart + moveDirection * segmentLength;
+                transform.position = targetPosition;
                 segmentStart = transform.position;
 
-                // Apply buffered direction (even if it’s blocked)
+                // 🚧 Handle buffered direction into wall
                 if (bufferedDirection != Vector3.zero)
                 {
-                    moveDirection = bufferedDirection;
-                    lastFacingDirection = moveDirection; // Even if blocked, rotate to it
-                    bufferedDirection = Vector3.zero;
+                    if (!CanMove(bufferedDirection))
+                    {
+                        // 🔁 Stop if trying to turn into a wall
+                        moveDirection = Vector3.zero;
+                        lastFacingDirection = bufferedDirection;
+                        bufferedDirection = Vector3.zero;
+                        isMoving = false;
+                        return;
+                    }
+                    else
+                    {
+                        moveDirection = bufferedDirection;
+                        lastFacingDirection = moveDirection;
+                        bufferedDirection = Vector3.zero;
+                        targetPosition = SnapToGrid(transform.position + moveDirection);
+                    }
                 }
-
-                // Check if new direction is blocked
-                if (Physics.Raycast(transform.position + Vector3.up * 0.5f, moveDirection, rayLength, obstacleMask))
+                else if (CanMove(moveDirection))
+                {
+                    targetPosition = SnapToGrid(transform.position + moveDirection);
+                }
+                else
                 {
                     moveDirection = Vector3.zero;
                     isMoving = false;
-                    return;
                 }
-
-                // Continue moving
-                isMoving = true;
             }
 
             return;
         }
 
         // Rotate when idle
-        if (lastFacingDirection != Vector3.zero)
+        if (!isMoving && lastFacingDirection != Vector3.zero)
         {
-            Quaternion targetRotation = Quaternion.LookRotation(lastFacingDirection, Vector3.up);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 720f * Time.deltaTime);
+            Quaternion targetRot = Quaternion.LookRotation(lastFacingDirection, Vector3.up);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRot, 720f * Time.deltaTime);
         }
 
-        // Try to start moving if direction is clear
-        if (bufferedDirection != Vector3.zero &&
-            !Physics.Raycast(transform.position + Vector3.up * 0.5f, bufferedDirection, rayLength, obstacleMask))
+        // Try buffered direction if possible
+        if (bufferedDirection != Vector3.zero)
         {
-            moveDirection = bufferedDirection;
-            lastFacingDirection = moveDirection; // Start rotating to buffered direction
-            bufferedDirection = Vector3.zero;
-            isMoving = true;
-            segmentStart = transform.position;
+            if (CanMove(bufferedDirection))
+            {
+                moveDirection = bufferedDirection;
+                lastFacingDirection = moveDirection;
+                bufferedDirection = Vector3.zero;
+                isMoving = true;
+                targetPosition = SnapToGrid(transform.position + moveDirection);
+            }
+            else
+            {
+                // 👇 Handle wall-turn from idle too
+                moveDirection = Vector3.zero;
+                lastFacingDirection = bufferedDirection;
+                bufferedDirection = Vector3.zero;
+                isMoving = false;
+            }
         }
     }
 
     public void OnMovement(InputValue value)
     {
         Vector2 input = value.Get<Vector2>();
-        if (input.magnitude < 0.1f)
-            return;
+        if (input.magnitude < 0.1f) return;
 
         Vector2 filtered = GetFilteredDirection(input);
+        Vector3 intended = new Vector3(filtered.y, 0f, -filtered.x);
 
-        // 🧭 Input mapping: Up = forward, Right = right
-        Vector3 intendedDirection = new Vector3(filtered.y, 0f, -filtered.x);
-
-        bufferedDirection = intendedDirection;
-        lastFacingDirection = intendedDirection; // Rotate toward this even if blocked
+        bufferedDirection = intended;
     }
 
     private Vector2 GetFilteredDirection(Vector2 input)
     {
-        if (Mathf.Abs(input.x) > Mathf.Abs(input.y))
-            return new Vector2(Mathf.Sign(input.x), 0f); // Horizontal
-        else
-            return new Vector2(0f, Mathf.Sign(input.y)); // Vertical
+        return Mathf.Abs(input.x) > Mathf.Abs(input.y)
+            ? new Vector2(Mathf.Sign(input.x), 0f)
+            : new Vector2(0f, Mathf.Sign(input.y));
+    }
+
+    private bool CanMove(Vector3 dir)
+    {
+        return !Physics.Raycast(transform.position + Vector3.up * 0.5f, dir, 1f, obstacleMask);
+    }
+
+    private Vector3 SnapToGrid(Vector3 pos)
+    {
+        return new Vector3(Mathf.Round(pos.x), pos.y, Mathf.Round(pos.z));
     }
 }

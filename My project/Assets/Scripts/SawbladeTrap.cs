@@ -3,11 +3,12 @@ using System.Collections;
 
 public class SawbladeTrap : MonoBehaviour
 {
-    public Transform trapHome;              // Reference to Traphome_Mid
-    public float moveSpeed = 2f;            // Movement speed
-    public float rotationSpeed = 180f;      // Saw rotation speed
-    public float moveDistance = 2f;         // Total move distance from center
-    public float timeOffset = 0.5f;         // ⏱ Delay before saw starts moving
+    public Transform trapHome;               // Reference to Traphome_Mid
+    public float moveSpeed = 2f;             // Movement speed
+    public float rotationSpeed = 180f;       // Saw rotation speed (degrees/sec)
+    public float moveDistance = 2f;          // Distance from center to each side
+    public float timeOffset = 0.5f;          // Delay before saw starts moving
+    public Vector3 rotationAxis = Vector3.up; // ✅ Inspector-settable rotation axis
 
     private Vector3 startPos;
     private Vector3 targetPos;
@@ -23,12 +24,11 @@ public class SawbladeTrap : MonoBehaviour
             return;
         }
 
-        // Calculate movement range based on trapHome's orientation
+        // Calculate center-based positions based on trap orientation
         Vector3 center = transform.position;
         startPos = center - trapHome.right * moveDistance;
         targetPos = center + trapHome.right * moveDistance;
 
-        // Delay activation
         StartCoroutine(DelayedStart());
     }
 
@@ -40,13 +40,13 @@ public class SawbladeTrap : MonoBehaviour
 
     void Update()
     {
-        // Always rotate, even before moving
-        transform.Rotate(Vector3.left * rotationSpeed * Time.deltaTime, Space.World);
+        // ✅ Rotate on user-defined axis in world space
+        transform.Rotate(rotationAxis.normalized * rotationSpeed * Time.deltaTime, Space.World);
 
         if (!active)
             return;
 
-        // Move back and forth between start and target positions
+        // Move saw back and forth
         Vector3 dir = (movingForward ? targetPos : startPos) - transform.position;
         float step = moveSpeed * Time.deltaTime;
 

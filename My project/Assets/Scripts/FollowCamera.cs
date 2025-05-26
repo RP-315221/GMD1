@@ -10,7 +10,7 @@ public class FollowCamera : MonoBehaviour
         if (target != null)
         {
             transform.position = target.position + offset;
-            transform.rotation = Quaternion.Euler(35, 65, 0); // fixed angle
+            transform.rotation = Quaternion.Euler(40, 60, 0); // fixed angle
         }
     }
 }

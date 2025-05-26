@@ -6,7 +6,7 @@ public class PlayerDeathDetector : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Death"))
         {
-            GameManager.Instance.KillPlayer(gameObject);
+            GameManager.Instance.InstantKillPlayer(gameObject);
         }
     }
 }
