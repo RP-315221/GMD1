@@ -42,7 +42,7 @@ Having in mind the traps and prefabs available to me I have planned the level la
 ### Title Screen
 Before building the levels I wanted to make a Title Screen scene for my game. In order to capture the essential thematic of it I have created a simple box room in which we have our player character, the gates we will be opening during the gameplay, some decorations and fire in the background that screams 'Hell'.
 
-![Uploading StartScreenCut-ezgif.com-video-to-gif-converter.gif…]()
+![StartScreenCut-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/1b63efc9-9dfe-4344-8f6d-564896422fce)
 
 ### Level 1
 Level 1 is meant to be easier on the player as it starts our journey through the game. Here we see the traps we will encounter in further levels for the first time. Traversing through level 1 becomes increasingly more difficult as we mix in different traps and increase the quantity of them and create thinner pathways for the player to go through. Moreover, we have 2 gates separating the main parts of the level with pressure plates that are easier to reach. 
