@@ -240,6 +240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 90
+  invertRotation: 0
 --- !u!4 &38083745 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1357180170229300036, guid: 269bd39097d0ba8439e3fa8a1231b751, type: 3}
@@ -1455,6 +1456,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 90
+  invertRotation: 0
 --- !u!65 &592582228
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1562,6 +1564,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 90
+  invertRotation: 0
 --- !u!65 &597884944
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4318,6 +4321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 90
+  invertRotation: 0
 --- !u!1 &1668970649
 GameObject:
   m_ObjectHideFlags: 0
@@ -6594,7 +6598,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5526969157815582383, guid: 4521b0d5536171941b00476ab4f26bcd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.273622
+      value: -11.58
       objectReference: {fileID: 0}
     - target: {fileID: 5526969157815582383, guid: 4521b0d5536171941b00476ab4f26bcd, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7579,7 +7583,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4903480183958831189, guid: 5548cee9f4d19fa46b25910c56076bf1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.843621
+      value: -13.12
       objectReference: {fileID: 0}
     - target: {fileID: 4903480183958831189, guid: 5548cee9f4d19fa46b25910c56076bf1, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7587,7 +7591,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4903480183958831189, guid: 5548cee9f4d19fa46b25910c56076bf1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.837572
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4903480183958831189, guid: 5548cee9f4d19fa46b25910c56076bf1, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7706,7 +7710,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8206938825131948786, guid: ecab9a249930b3e44b7a7a367f1e65b6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.896
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8206938825131948786, guid: ecab9a249930b3e44b7a7a367f1e65b6, type: 3}
       propertyPath: m_LocalRotation.w

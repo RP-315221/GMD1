@@ -1,7 +1,8 @@
-
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,15 +12,23 @@ public class GameManager : MonoBehaviour
     public GameObject explosionPrefab;
     public GameObject playerPrefab;
 
-    private bool isPlayerDead = false;
-    public LayerMask levelBaseLayer; // Boundry layer for level platforms
-    private GameObject currentPlayer;
+    [Header("UI")]
+    public GameObject levelCompletePopup;  // 👈 Assign your popup here in Inspector
 
-    private Coroutine fallCheckCoroutine = null;
-    public float graceTime = 0.25f; // Adjustable delay before falling to death
+    [Header("Scene Progression")]
+    public float continueDelay = 0.5f; // Optional delay before accepting input
 
-    [Header("Respawn Settings")]
+    [Header("Death and Respawn Settings")]
     public Vector3 playerRespawnPosition = Vector3.zero;
+    public float graceTime = 0.25f; // Adjustable delay before falling to death
+    public LayerMask levelBaseLayer; // Boundry layer for level platforms
+
+    //Other private variables
+    private bool isPlayerDead = false;
+    private bool levelComplete = false;
+    private bool inputBlocked = false;
+    private GameObject currentPlayer;
+    private Coroutine fallCheckCoroutine = null;
 
 
     public void RegisterPlayer(GameObject player)
@@ -42,6 +51,28 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (levelComplete && !inputBlocked)
+        {
+            if ((Gamepad.current != null && Gamepad.current.buttonSouth.wasPressedThisFrame) ||  // A button
+                (Keyboard.current != null && Keyboard.current.enterKey.wasPressedThisFrame))      // fallback key
+            {
+                LoadNextScene();
+            }
+
+            // Movement cancels popup
+            Vector2 moveInput =
+                Gamepad.current != null ? Gamepad.current.leftStick.ReadValue() :
+                (Keyboard.current != null ? new Vector2(
+                    Keyboard.current.aKey.isPressed ? -1 : Keyboard.current.dKey.isPressed ? 1 : 0,
+                    Keyboard.current.wKey.isPressed ? 1 : Keyboard.current.sKey.isPressed ? -1 : 0
+                ) : Vector2.zero);
+
+            if (moveInput.magnitude > 0.1f)
+            {
+                HideLevelCompletePopup();
+            }
+        }
+
         if (isPlayerDead)
         {
             bool yPressed =
@@ -74,6 +105,8 @@ public class GameManager : MonoBehaviour
             fallCheckCoroutine = null;
         }
     }
+
+    //Player falling death methods
     private IEnumerator GracePeriodFallCheck()
     {
         yield return new WaitForSeconds(graceTime);
@@ -87,7 +120,6 @@ public class GameManager : MonoBehaviour
 
         fallCheckCoroutine = null; // Clean up reference
     }
-
     public void KillPlayer(GameObject player)
     {
         if (player == null || explosionPrefab == null) return;
@@ -104,20 +136,6 @@ public class GameManager : MonoBehaviour
         // Start manual fall and destroy sequence
         StartCoroutine(FallThenExplode(player));
     }
-    public void InstantKillPlayer(GameObject player)
-    {
-        if (player == null || isPlayerDead || explosionPrefab == null) return;
-
-        isPlayerDead = true;
-        
-        // Play explosion immediately
-        Vector3 offsetPos = player.transform.position + Vector3.up * 1f;
-        GameObject explosion = Instantiate(explosionPrefab, offsetPos, Quaternion.identity);
-        Destroy(explosion, 2f);
-        Destroy(player);
-    }
-
-
     private IEnumerator FallThenExplode(GameObject player)
     {
         float fallDuration = 0.5f;
@@ -140,6 +158,22 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //Player dying to a trap
+    public void InstantKillPlayer(GameObject player)
+    {
+        if (player == null || isPlayerDead || explosionPrefab == null) return;
+
+        isPlayerDead = true;
+
+        // Play explosion immediately
+        Vector3 offsetPos = player.transform.position + Vector3.up * 1f;
+        GameObject explosion = Instantiate(explosionPrefab, offsetPos, Quaternion.identity);
+        Destroy(explosion, 2f);
+        Destroy(player);
+    }
+
+
+    //Player respawn
     private void RespawnPlayer()
     {
         if (playerPrefab == null)
@@ -164,5 +198,38 @@ public class GameManager : MonoBehaviour
 
         // Optional: re-register new player
         RegisterPlayer(newPlayer);
+    }
+
+    //Level Progression methods
+    public void TriggerLevelComplete()
+    {
+        levelComplete = true;
+        inputBlocked = true;
+        if (levelCompletePopup != null)
+            levelCompletePopup.SetActive(true);
+
+        // Delay so player doesn't accidentally skip it immediately
+        Invoke(nameof(AllowContinueInput), continueDelay);
+    }
+    private void AllowContinueInput() => inputBlocked = false;
+
+    private void HideLevelCompletePopup()
+    {
+        if (levelCompletePopup != null)
+            levelCompletePopup.SetActive(false);
+
+        levelComplete = false;
+    }
+    private void LoadNextScene()
+    {
+        int nextIndex = SceneManager.GetActiveScene().buildIndex + 1;
+        if (nextIndex < SceneManager.sceneCountInBuildSettings)
+        {
+            SceneManager.LoadScene(nextIndex);
+        }
+        else
+        {
+            Debug.Log("🎉 No more levels! Maybe show credits?");
+        }
     }
 }
