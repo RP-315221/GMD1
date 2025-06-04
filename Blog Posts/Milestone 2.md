@@ -105,7 +105,7 @@ I added scripted behaviour to the pressure plate. If the player steps on it, it 
 
 ![image](https://github.com/user-attachments/assets/a02f92a8-dccb-4a9e-8ea7-d63249fb9d6f)
 
-As for the gates, I adjusted the colliders. The main part is marked with 'Object' layer so the player can bump into the gates. However, I also attached an empty game object with another collider located at the vert top of the gates, marked with 'Death'. This is meant to punish the player if they are standing of the tiles of the lowered gate or if they are taking too long to pass and by some mistake end up timing their traversal through the gates at the last second. 
+As for the gates, I adjusted the colliders. The main part is marked with 'Object' layer so the player can bump into the gates. However, I also attached an empty game object with another collider located at the top of the gates, marked with 'Death'. This is meant to punish the player if they are standing of the tiles of the lowered gate or if they are taking too long to pass and by some mistake end up timing their traversal through the gates at the last second. 
 
 ![GatesKill-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/947e598d-a752-42da-9030-990d215269c8)
 
