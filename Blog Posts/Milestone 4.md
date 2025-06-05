@@ -89,7 +89,8 @@ Here's how everything looks like in action :)
 ## Background soundtrack
 As a final touch to the game I have added a soundtrack to it. During the planning of the game I was very sure that I wanted to use a specific track from Terraria. I chose Eerie - by Scott Lloyd Shelly & Re-Logic (link at the end of the doc, also referenced in End Credits and Github Repository ReadMe.md file). 
 
-![Terraria 'Eerie' - by Scott Lloyd Shelly & Re-Logic](https://www.youtube.com/watch?v=3CM1_Ji6fJ8)
+[![Terraria 'Eerie' - by Scott Lloyd Shelly & Re-Logic](https://img.youtube.com/vi/R2Hs-v5XEFQ/0.jpg)](https://www.youtube.com/watch?v=R2Hs-v5XEFQ)
+
 
 This track captures the feeling of hell like nothing else for me. I have grown up playing Terraria with my cousins and having this music in my game sets the perfect nostalgic mood :) 
 
