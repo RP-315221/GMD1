@@ -87,42 +87,9 @@ Here's how everything looks like in action :)
 ![Respawning-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/7b8a425d-15ab-4e2a-9dc6-6fe1142302b3)
 
 ## Background soundtrack
-As a final touch to the game I have added a soundtrack to it. During the planning of the game I was very sure that I wanted to use a specific track from Terraria. I chose Eerie - by Scott Lloyd Shelly & Re-Logic (link at the end of the doc, also referenced in End Credits and Github Repository ReadMe.md file). 
+As a final touch to the game I have added a soundtrack to it. During the planning of the game I was very sure that I wanted to use a specific track from Terraria. I chose Eerie - by Scott Lloyd Shelly & Re-Logic (link at the end of the doc, also referenced in End Credits and Github Repository ReadMe.md file). Click below to play:
 
 [![Terraria 'Eerie' - by Scott Lloyd Shelly & Re-Logic](https://img.youtube.com/vi/R2Hs-v5XEFQ/0.jpg)](https://www.youtube.com/watch?v=R2Hs-v5XEFQ)
-
-<a href="https://www.youtube.com/watch?v=R2Hs-v5XEFQ">
-  <figure style="display: inline-block; position: relative;">
-    <img
-      src="https://img.youtube.com/vi/R2Hs-v5XEFQ/0.jpg"
-      alt="Sample Video"
-      style="max-width: 100%; height: auto;"
-    />
-    <!-- A simple play‐triangle overlay in CSS/HTML -->
-    <svg
-      viewBox="0 0 68 48"
-      style="
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 68px;
-        height: 48px;
-        transform: translate(-50%, -50%);
-      "
-    >
-      <path
-        d="M66.52,7.35 C65.65,3.24 62.76,0.35 58.65,−0.52 C53.42,−1.53 34,−1.53 34,−1.53 s−19.42,0 −24.65,1.01 C5.24,0.35 2.35,3.24 1.48,7.35 C0.48,12.58 0.48,24 0.48,24 s0,11.42 1,16.65 c0.87,4.11 3.76,7 7.87,7.87 c5.23,1.01 24.65,1.01 24.65,1.01 s19.42,0 24.65,−1.01 c4.11,−0.87 7,−3.76 7.87,−7.87 c1,−5.23 1,−16.65 1,−16.65 S67.52,12.58 66.52,7.35 Z"
-        fill="#f00"
-      ></path>
-      <path d="M45,24 27,14 27,34" fill="#fff"></path>
-    </svg>
-    <figcaption style="text-align: center; font-size: 0.9em; color: #ddd;">
-      ▶ Play on YouTube
-    </figcaption>
-  </figure>
-</a>
-
-
 
 This track captures the feeling of hell like nothing else for me. I have grown up playing Terraria with my cousins and having this music in my game sets the perfect nostalgic mood :) 
 
