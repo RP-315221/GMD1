@@ -4,25 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class IntroGameManager : MonoBehaviour
 {
-    [Header("Scene Transition")]
-    public float delayBeforeAllowingInput = 2f; // Optional: prevent accidental skip
-    private bool inputAllowed = false;
-
-    private void Start()
-    {
-        // Wait a short moment before allowing input
-        Invoke(nameof(EnableInput), delayBeforeAllowingInput);
-    }
-
-    private void EnableInput()
-    {
-        inputAllowed = true;
-    }
-
     private void Update()
     {
-        if (!inputAllowed) return;
-
         // Gamepad A or Keyboard Enter
         bool aPressed =
             (Gamepad.current != null && Gamepad.current.buttonSouth.wasPressedThisFrame) ||
@@ -44,7 +27,7 @@ public class IntroGameManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("🟡 No next scene found. End of build settings?");
+            Debug.Log("No next scene found!");
         }
     }
 }

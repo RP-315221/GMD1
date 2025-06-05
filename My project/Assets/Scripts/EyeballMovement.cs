@@ -22,7 +22,15 @@ public class EyeballMovement : MonoBehaviour
         transform.position = SnapToGrid(transform.position);
         segmentStart = transform.position;
         targetPosition = transform.position;
-        GameManager.Instance.RegisterPlayer(gameObject);
+        GameManager gm = FindFirstObjectByType<GameManager>();
+        if (gm != null)
+        {
+            gm.RegisterPlayer(gameObject);
+        }
+        else
+        {
+            Debug.LogWarning("⚠ GameManager not found in scene!");
+        }
     }
 
     void Update()

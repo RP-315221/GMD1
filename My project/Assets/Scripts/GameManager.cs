@@ -1,88 +1,63 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance { get; private set; }
-
     [Header("Prefabs")]
     public GameObject explosionPrefab;
     public GameObject playerPrefab;
-
-    [Header("UI")]
-    public GameObject levelCompletePopup;  // 👈 Assign your popup here in Inspector
-
-    [Header("Scene Progression")]
-    public float continueDelay = 0.5f; // Optional delay before accepting input
 
     [Header("Death and Respawn Settings")]
     public Vector3 playerRespawnPosition = Vector3.zero;
     public float graceTime = 0.25f; // Adjustable delay before falling to death
     public LayerMask levelBaseLayer; // Boundry layer for level platforms
 
+    [Header("Death Message")]
+    public GameObject deathPanel;
+
     //Other private variables
     private bool isPlayerDead = false;
-    private bool levelComplete = false;
-    private bool inputBlocked = false;
     private GameObject currentPlayer;
     private Coroutine fallCheckCoroutine = null;
-
 
     public void RegisterPlayer(GameObject player)
     {
         currentPlayer = player;
     }
 
-    private void Awake()
-    {
-        // Singleton setup
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
 
     private void Update()
     {
-        if (levelComplete && !inputBlocked)
-        {
-            if ((Gamepad.current != null && Gamepad.current.buttonSouth.wasPressedThisFrame) ||  // A button
-                (Keyboard.current != null && Keyboard.current.enterKey.wasPressedThisFrame))      // fallback key
-            {
-                LoadNextScene();
-            }
-
-            // Movement cancels popup
-            Vector2 moveInput =
-                Gamepad.current != null ? Gamepad.current.leftStick.ReadValue() :
-                (Keyboard.current != null ? new Vector2(
-                    Keyboard.current.aKey.isPressed ? -1 : Keyboard.current.dKey.isPressed ? 1 : 0,
-                    Keyboard.current.wKey.isPressed ? 1 : Keyboard.current.sKey.isPressed ? -1 : 0
-                ) : Vector2.zero);
-
-            if (moveInput.magnitude > 0.1f)
-            {
-                HideLevelCompletePopup();
-            }
-        }
-
         if (isPlayerDead)
         {
             bool yPressed =
-                (Gamepad.current != null && Gamepad.current.buttonNorth.wasPressedThisFrame) ||
-                (Keyboard.current != null && Keyboard.current.yKey.wasPressedThisFrame);
+                (Gamepad.current != null && Gamepad.current.buttonNorth.wasPressedThisFrame);
+
+            bool bPressed =
+                (Gamepad.current != null && Gamepad.current.buttonEast.wasPressedThisFrame);
+
+            if (bPressed)
+            {
+                SceneHandler handler = FindFirstObjectByType<SceneHandler>();
+                if (handler != null)
+                {
+                    handler.LoadScene(0);
+                }
+                else
+                {
+                    Debug.LogWarning("SceneHandler not found in scene.");
+                }
+            }
 
             if (yPressed)
             {
+                // Hiding Death Message 
+                TryHideDeathPanel();
                 RespawnPlayer();
             }
+
             return;
         }
 
@@ -135,6 +110,9 @@ public class GameManager : MonoBehaviour
 
         // Start manual fall and destroy sequence
         StartCoroutine(FallThenExplode(player));
+
+        // Showing Death Message 
+        TryShowDeathPanel();
     }
     private IEnumerator FallThenExplode(GameObject player)
     {
@@ -170,6 +148,9 @@ public class GameManager : MonoBehaviour
         GameObject explosion = Instantiate(explosionPrefab, offsetPos, Quaternion.identity);
         Destroy(explosion, 2f);
         Destroy(player);
+
+        // Showing Death Message 
+        TryShowDeathPanel();
     }
 
 
@@ -185,7 +166,7 @@ public class GameManager : MonoBehaviour
         GameObject newPlayer = Instantiate(playerPrefab, playerRespawnPosition, Quaternion.identity);
         isPlayerDead = false;
 
-        // ✅ Assign new player to the FollowCamera
+        // Assign new player to the FollowCamera
         FollowCamera cam = Camera.main?.GetComponent<FollowCamera>();
         if (cam != null)
         {
@@ -196,40 +177,21 @@ public class GameManager : MonoBehaviour
             Debug.LogWarning("Main camera or FollowCamera script not found!");
         }
 
-        // Optional: re-register new player
         RegisterPlayer(newPlayer);
     }
 
-    //Level Progression methods
-    public void TriggerLevelComplete()
+    private void TryShowDeathPanel()
     {
-        levelComplete = true;
-        inputBlocked = true;
-        if (levelCompletePopup != null)
-            levelCompletePopup.SetActive(true);
-
-        // Delay so player doesn't accidentally skip it immediately
-        Invoke(nameof(AllowContinueInput), continueDelay);
-    }
-    private void AllowContinueInput() => inputBlocked = false;
-
-    private void HideLevelCompletePopup()
-    {
-        if (levelCompletePopup != null)
-            levelCompletePopup.SetActive(false);
-
-        levelComplete = false;
-    }
-    private void LoadNextScene()
-    {
-        int nextIndex = SceneManager.GetActiveScene().buildIndex + 1;
-        if (nextIndex < SceneManager.sceneCountInBuildSettings)
+        if (deathPanel != null)
         {
-            SceneManager.LoadScene(nextIndex);
+            deathPanel.SetActive(true);
         }
-        else
+    }
+    private void TryHideDeathPanel()
+    {
+        if (deathPanel != null)
         {
-            Debug.Log("🎉 No more levels! Maybe show credits?");
+            deathPanel.SetActive(false);
         }
     }
 }

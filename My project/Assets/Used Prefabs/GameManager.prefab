@@ -45,3 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionPrefab: {fileID: 6927070346101701007, guid: 18edcb68adcda3042a655e4c260bba21, type: 3}
+  playerPrefab: {fileID: 1428063450602143059, guid: e15db141938cd804e9db8d0cecc8d544, type: 3}
+  playerRespawnPosition: {x: 0, y: 0, z: 0}
+  graceTime: 0.25
+  levelBaseLayer:
+    serializedVersion: 2
+    m_Bits: 1024

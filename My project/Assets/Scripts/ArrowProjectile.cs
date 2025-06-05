@@ -47,8 +47,15 @@ public class ArrowProjectile : MonoBehaviour
             hasHit = true;
 
             // Kill the player via GameManager
-            GameManager.Instance.KillPlayer(other.gameObject);
-
+            GameManager gm = FindFirstObjectByType<GameManager>();
+            if (gm != null)
+            {
+                gm.KillPlayer(other.gameObject);
+            }
+            else
+            {
+                Debug.LogWarning("⚠ GameManager not found in scene!");
+            }
             // Stop all motion and physics immediately
             rb.linearVelocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;

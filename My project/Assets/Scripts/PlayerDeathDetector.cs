@@ -6,7 +6,15 @@ public class PlayerDeathDetector : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Death"))
         {
-            GameManager.Instance.InstantKillPlayer(gameObject);
+            GameManager gm = FindFirstObjectByType<GameManager>();
+            if (gm != null)
+            {
+                gm.InstantKillPlayer(gameObject);
+            }
+            else
+            {
+                Debug.LogWarning("⚠ GameManager not found in scene!");
+            }
         }
     }
 }
