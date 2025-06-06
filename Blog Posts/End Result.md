@@ -46,6 +46,7 @@ I have implemented 5 types of traps to be used around the levels. The traps have
 
 ### Gates
 Gates are a special interactable object. The player can open them by stepping on a plate, in which case they have 10 seconds to get past them before they close again.
+
 ![Gates-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/7ca09abd-ae12-41f6-95f9-d1b7aa740a54)
 
 ## Scenes
