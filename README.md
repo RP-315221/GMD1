@@ -22,9 +22,9 @@ https://www.youtube.com/watch?v=pX2SBg6gF8s
 2. Flamethrower flame - https://assetstore.unity.com/packages/vfx/particles/vfx-magical-flames-293962
 3. Player death VFX - https://assetstore.unity.com/packages/vfx/particles/fire-explosions/comic-explosion-effect-317348
 4. Various prefabs - https://assetstore.unity.com/packages/3d/environments/dungeons/dungeon-low-poly-toon-battle-arena-tower-defense-pack-109791
-5. Various prefabshttps://assetstore.unity.com/packages/3d/environments/dungeons/low-poly-free-dungeon-pack-191979
-6. Various prefabs- https://assetstore.unity.com/packages/3d/environments/dungeons/lite-dungeon-pack-low-poly-3d-art-by-gridness-242692
-7. Various prefabs- https://assetstore.unity.com/packages/3d/props/3d-low-poly-chest-240360
+5. Various prefabs - https://assetstore.unity.com/packages/3d/environments/dungeons/low-poly-free-dungeon-pack-191979
+6. Various prefabs - https://assetstore.unity.com/packages/3d/environments/dungeons/lite-dungeon-pack-low-poly-3d-art-by-gridness-242692
+7. Various prefabs - https://assetstore.unity.com/packages/3d/props/3d-low-poly-chest-240360
 8. Intro Screen and Finish VFX - https://assetstore.unity.com/packages/vfx/particles/fire-explosions/low-poly-fire-244190
 9. Materials for everything - https://assetstore.unity.com/packages/2d/textures-materials/stylized-lava-materials-180943
 
